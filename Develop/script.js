@@ -2,17 +2,23 @@
 
 var generatePassword = function() {
   // Our criteria
+  password = '';
   var passwordCharacters = '';
 
+  // Defining the length of the password
   var promptLength = window.prompt("How long would you like your password?");
-  if (promptLength != parseInt(promptLength)) {
+  if (!promptLength) {
+    return;
+  }
+  else if (promptLength != parseInt(promptLength)) {
     window.alert("Non-numeric response. Please enter a valid number such as '420'");
     generatePassword();
   }
   else {
-    password.length = parseInt(promptLength);
+    passwordLength = parseInt(promptLength);
   }
 
+  // Password character selection
   var promptLowercase = window.confirm("Would you like lowercase letters in your password?");
   var promptUppercase = window.confirm("Would you like uppercase letters in your password?");
   var promptNumbers = window.confirm("Would you like numbers in your password?");
@@ -29,11 +35,16 @@ var generatePassword = function() {
   if (promptSpecial) {
     passwordCharacters = passwordCharacters + '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
   }
+  if (passwordCharacters == '') {
+    window.alert("You need to select at least 1 type of character")
+    generatePassword();
+  }
 
-  // for (let i = 0; i < password.length; i++) {
-  //   password = password + passwordCharacters.charAt(Math.floor(Math.random() * passwordCharacters.length));
-  // }
-  // return;
+  // Password generation
+  for (let i = 0; i < passwordLength; i++) {
+    password = password + passwordCharacters.charAt(Math.floor(Math.random() * passwordCharacters.length));
+  }
+  return password;
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
