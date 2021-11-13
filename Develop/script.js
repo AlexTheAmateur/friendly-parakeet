@@ -36,7 +36,7 @@ var generatePassword = function() {
     passwordCharacters = passwordCharacters + '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
   }
   if (passwordCharacters == '') {
-    window.alert("You need to select at least 1 type of character")
+    window.alert("You need to select at least 1 character type")
     generatePassword();
   }
 
