@@ -6,16 +6,20 @@ var generatePassword = function() {
   var passwordCharacters = '';
 
   // Defining the length of the password
-  var promptLength = window.prompt("How long would you like your password?");
+  var promptLength = window.prompt("How long would you like your password? Please select a value between 8 and 128");
   if (!promptLength) {
     return;
   }
   else if (promptLength != parseInt(promptLength)) {
-    window.alert("Non-numeric response. Please enter a valid number such as '420'");
+    window.alert("Non-numeric response. Please enter a valid number such as '42'");
     generatePassword();
   }
-  else {
+  else if (8 <= parseInt(promptLength) && parseInt(promptLength) <= 128) {
     passwordLength = parseInt(promptLength);
+  }
+  else {
+    window.alert("Please enter a valid number between 8 and 128, such as '42'");
+    generatePassword();
   }
 
   // Password character selection
