@@ -2,7 +2,7 @@
 
 var generatePassword = function() {
   // Our criteria
-  password = '';
+  var password = '';
   var passwordCharacters = '';
 
   // Defining the length of the password
@@ -23,22 +23,12 @@ var generatePassword = function() {
   }
 
   // Password character selection
-  var promptLowercase = window.confirm("Would you like lowercase letters in your password?");
-  var promptUppercase = window.confirm("Would you like uppercase letters in your password?");
-  var promptNumbers = window.confirm("Would you like numbers in your password?");
-  var promptSpecial = window.confirm("Would you like special characters in your password?");
-  if (promptLowercase) {
-    passwordCharacters = passwordCharacters + 'ascdefghijklmnopqrstuvwxyz'
-  }
-  if (promptUppercase) {
-    passwordCharacters = passwordCharacters + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  }
-  if (promptNumbers) {
-    passwordCharacters = passwordCharacters + '0123456789'
-  }
-  if (promptSpecial) {
-    passwordCharacters = passwordCharacters + '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-  }
+  passwordCharacters += promptCharacters('lowercase letters', 'ascdefghijklmnopqrstuvwxyz');
+  passwordCharacters += promptCharacters('uppercase letters', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  passwordCharacters += promptCharacters('numbers', '0123456789');
+  passwordCharacters += promptCharacters('special characters', '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~');
+  console.log(passwordCharacters);
+
   if (passwordCharacters == '') {
     window.alert("You need to select at least 1 character type")
     generatePassword();
@@ -49,6 +39,17 @@ var generatePassword = function() {
     password = password + passwordCharacters.charAt(Math.floor(Math.random() * passwordCharacters.length));
   }
   return password;
+}
+
+// Helper function for prompting character selection
+var promptCharacters = function(letterType, letterValue) {
+  // return (window.confirm("Would you like " + letterType + " in your password?") ? letterValue : '');
+  if (window.confirm("Would you like " + letterType + " in your password?")) {
+    return letterValue;
+  }
+  else {
+    return ''; 
+  }
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
